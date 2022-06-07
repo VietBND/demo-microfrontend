@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "projects": {
+    "demo-shell": "apps/demo-shell",
+    "demo-shell-e2e": "apps/demo-shell-e2e",
+    "flight-feature-flight": "libs/flight/feature-flight",
+    "flight-routes": "libs/flight/routes",
+    "flight-web": "apps/flight-web",
+    "flight-web-e2e": "apps/flight-web-e2e",
+    "shared-common-ux": "libs/shared/common-ux"
+  }
+}

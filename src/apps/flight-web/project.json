@@ -1,0 +1,119 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/flight-web/src",
+  "prefix": "demo-microfrontend",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/flight-web",
+        "index": "apps/flight-web/src/index.html",
+        "main": "apps/flight-web/src/main.ts",
+        "polyfills": "apps/flight-web/src/polyfills.ts",
+        "tsConfig": "apps/flight-web/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/flight-web/src/favicon.ico",
+          "apps/flight-web/src/assets"
+        ],
+        "styles": ["apps/flight-web/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/flight-web/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/flight-web/src/environments/environment.ts",
+              "with": "apps/flight-web/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/flight-web/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "flight-web:build:production"
+        },
+        "development": {
+          "browserTarget": "flight-web:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4201,
+        "publicHost": "http://localhost:4201"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "flight-web:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/flight-web/**/*.ts",
+          "apps/flight-web/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/flight-web"],
+      "options": {
+        "jestConfig": "apps/flight-web/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "flight-web:build",
+        "port": 4201
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "flight-web:build:development"
+        },
+        "production": {
+          "buildTarget": "flight-web:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

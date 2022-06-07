@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/flight/routes/src",
+  "prefix": "demo-microfrontend",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/flight/routes"],
+      "options": {
+        "jestConfig": "libs/flight/routes/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/flight/routes/**/*.ts",
+          "libs/flight/routes/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
